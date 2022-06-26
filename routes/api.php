@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('posts/create', [PostController::class, 'create'])->name('createPost');
 Route::get('posts/{id}', [PostController::class, 'get'])->name('getPost');
 Route::delete('posts/{id}', [PostController::class, 'delete'])->name('deletePost');
-Route::put('posts/{id}', [PostController::class, 'put'])->name('putPost');
-Route::post('posts:search', [PostController::class, 'search']);
+Route::patch('posts/{id}', [PostController::class, 'patch'])->name('patchPost');
+Route::post('posts:search', [PostController::class, 'search'])->name('searchPost');

@@ -3,10 +3,11 @@
 namespace App\Resources;
 
 use App\Models\Post;
+use App\Support\Resources\BaseJsonResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin Post */
-class PostResource extends JsonResource
+class PostResource extends BaseJsonResource
 {
     /**
      * Transform the resource collection into an array.

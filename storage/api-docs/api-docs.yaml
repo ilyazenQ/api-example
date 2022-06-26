@@ -63,15 +63,15 @@ paths:
           $ref: '#/components/responses/NotFound'
         "500":
           $ref: '#/components/responses/ServerError'
-    put:
+    patch:
       tags:
         - posts
       operationId: putPost
-      x-lg-handler: 'App\Http\Controllers\PostController@put'
-      x-lg-route-name: 'putPost'
+      x-lg-handler: 'App\Http\Controllers\PostController@patch'
+      x-lg-route-name: 'patchPost'
       x-lg-skip-request-generation: true
-      summary: Обновление объекта типа Post
-      description: Обновление объекта типа Post
+      summary: Обновление части объекта типа Post
+      description: Обновление части объекта типа Post
       parameters:
         - $ref: '#/components/parameters/PathId'
       requestBody:
@@ -87,7 +87,7 @@ paths:
             application/json:
               schema:
                 $ref: 'posts-components.yaml#/PostResponse'
-        "400":
+        "422":
           $ref: '#/components/responses/BadRequest'
         "404":
           $ref: '#/components/responses/NotFound'
@@ -111,8 +111,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyDataResponse'
-        "400":
-          $ref: '#/components/responses/BadRequest'
         "404":
           $ref: '#/components/responses/NotFound'
         "500":
@@ -123,6 +121,7 @@ paths:
         - posts
       operationId: searchPost
       x-lg-handler: 'App\Http\Controllers\PostController@search'
+        x-lg-route-name: 'searchPost'
       x-lg-skip-request-generation: true
       summary: Поиск объектов типа Post
       description: Поиск объектов типа Post

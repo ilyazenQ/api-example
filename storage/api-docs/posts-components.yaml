@@ -127,6 +127,13 @@ SearchPostFilter:
   properties:
     id:
       type: integer
-      description: Идентификатор поста
       example: 1
+      nullable: true
+    user_id:
+      type: integer
+      example: 1
+      nullable: true
+    title:
+      type: string
+      example: "Example title"
       nullable: true
