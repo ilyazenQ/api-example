@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: api-example
+  contact:
+    name: API Support
+    url: http://localhost:8877
+  version: 1.0.0
+  description: Blog service
+servers:
+  - url: http://localhost:8877/api
+tags:
+  - name: posts
+    description: тег для объекта типа Post
+paths:
+  /posts/create:
+    post:
+      tags:
+        - posts
+      operationId: createPost
+      x-lg-handler: '\App\Http\Controllers\PostController@create'
+      x-lg-route-name: 'createPost'
+      x-lg-skip-request-generation: true
+      summary: Создание объекта типа Post
+      description: Создание объекта типа Post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'posts-components.yaml#PostForCreate'
+      responses:
+        "201":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: 'posts-components.yaml#PostResponse'
+        "422":
+          $ref: '#/components/responses/BadRequest'
+        "500":
+          $ref: '#/components/responses/ServerError'
+  /posts/{id}:
+    get:
+      tags:
+        - posts
+      operationId: getPost
+      x-lg-handler: 'App\Http\Controllers\PostController@get'
+      x-lg-route-name: 'getPost'
+      x-lg-skip-request-generation: true
+      summary: Получение объекта типа Post
+      description: Получение объекта типа Post
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/QueryInclude'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: 'posts-components.yaml#/PostResponse'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags:
+        - posts
+      operationId: putPost
+      x-lg-handler: 'App\Http\Controllers\PostController@put'
+      x-lg-route-name: 'putPost'
+      x-lg-skip-request-generation: true
+      summary: Обновление объекта типа Post
+      description: Обновление объекта типа Post
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'posts-components.yaml#/PostForPatch'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: 'posts-components.yaml#/PostResponse'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - posts
+      operationId: deletePost
+      x-lg-handler: 'App\Http\Controllers\PostController@delete'
+      x-lg-route-name: 'deletePost'
+      x-lg-skip-request-generation: true
+      summary: Удаление объекта типа Post
+      description: Удаление объекта типа Post
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyDataResponse'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/ServerError'
+  /posts:search:
+    post:
+      tags:
+        - posts
+      operationId: searchPost
+      x-lg-handler: 'App\Http\Controllers\PostController@search'
+      x-lg-skip-request-generation: true
+      summary: Поиск объектов типа Post
+      description: Поиск объектов типа Post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'posts-components.yaml#/SearchPostRequest'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: 'posts-components.yaml#/SearchPostResponse'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+components:
+  parameters:
+    QueryInclude:
+      $ref: './common_parameters.yaml#/QueryInclude'
+    PathId:
+      $ref: './common_parameters.yaml#/PathId'
+  schemas:
+    EmptyDataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+        meta:
+          type: object
+      required:
+        - data
+    PaginationTypeEnum:
+      $ref: './common_schemas.yaml#/PaginationTypeEnum'
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    HttpResponseException:
+      description: 422
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'

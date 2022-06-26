@@ -1,0 +1,132 @@
+PostReadonlyProperties:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Идентификатор
+      example: 1
+    created_at:
+      type: string
+      format: date
+      example: "2022-03-29T10:17:08.000000Z"
+    updated_at:
+      type: string
+      format: date
+      example: "2022-04-29T10:17:08.000000Z"
+
+PostFillableProperties:
+  type: object
+  properties:
+    title:
+      type: string
+      description: Название статьи
+      example: "Example title"
+    slug:
+      type: string
+      description: Название статьи без пробелов между словами (каждое слово с маленькой буквы)
+      example: "exampletitle"
+    body:
+      type: string
+      description: Контент статьи
+      example: "Это контент статьи"
+    user_id:
+      type: integer
+      description: Идентификатор автора статьи
+      example: 1
+    is_published:
+      type: boolean
+      description: Публикация статьи
+      example: false
+
+PostIncludes:
+  type: object
+  properties:
+    users:
+      type: array
+      items:
+        $ref: 'users-components.yaml#/User'
+    categories:
+      type: array
+      items:
+        $ref: 'categories-components.yaml#/Category'
+
+
+PostRequiredRequestProperties:
+  type: object
+  required:
+    - title
+    - slug
+    - body
+    - user_id
+
+PostRequiredResponseProperties:
+  type: object
+  required:
+    - id
+    - title
+    - slug
+    - user_id
+    - is_published
+    - created_at
+    - updated_at
+
+PostForCreate:
+  allOf:
+    - $ref: '#/PostFillableProperties'
+    - $ref: '#/PostRequiredRequestProperties'
+
+PostForPatch:
+  allOf:
+    - $ref: '#/PostFillableProperties'
+
+Post:
+  allOf:
+    - $ref: '#/PostReadonlyProperties'
+    - $ref: '#/PostFillableProperties'
+
+PostResponse:
+  type: object
+  properties:
+    data:
+      $ref: '#/Post'
+    meta:
+      type: object
+  required:
+    - data
+
+SearchPostRequest:
+  type: object
+  properties:
+    sort:
+      $ref: 'common_schemas.yaml#/RequestBodySort'
+    filter:
+      $ref: '#/SearchPostFilter'
+    include:
+      $ref: 'common_schemas.yaml#/RequestBodyInclude'
+    pagination:
+      $ref: 'common_schemas.yaml#/RequestBodyPagination'
+
+SearchPostResponse:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '#/Post'
+    meta:
+      type: object
+      properties:
+        pagination:
+          $ref: 'common_schemas.yaml#/ResponseBodyPagination'
+  required:
+    - data
+    - meta
+
+SearchPostFilter:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Идентификатор поста
+      example: 1
+      nullable: true
