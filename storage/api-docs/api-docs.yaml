@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
   title: api-example
   contact:
@@ -121,7 +121,7 @@ paths:
         - posts
       operationId: searchPost
       x-lg-handler: 'App\Http\Controllers\PostController@search'
-        x-lg-route-name: 'searchPost'
+      x-lg-route-name: 'searchPost'
       x-lg-skip-request-generation: true
       summary: Поиск объектов типа Post
       description: Поиск объектов типа Post
