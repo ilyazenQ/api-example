@@ -19,7 +19,14 @@
 3. `docker exec -it app_app bash`
 4. `composer i`
 5. `cp .env.example .env`
-6. Указываем в .env доступы к БД
+6. Указываем в .env доступы к БД<br>
+DB_CONNECTION=mysql  <br>
+   DB_HOST=db <br>
+   DB_PORT=3306 <br>
+   DB_DATABASE=app <br>
+   DB_USERNAME=root<br>
+   DB_PASSWORD=root<br>
+   (Если проблема с доступом - chmod 777 -R ./)
 7. `php artisan key:generate`
 8. `php artisan storage:link`
 9. `php artisan migrate`
