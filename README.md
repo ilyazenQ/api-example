@@ -13,7 +13,8 @@
 
 ## Разворот
 
-1. `git clone git@gitlab.com:greensight/ensi/backend-service-skeleton.git <new-repo-name>`
+1. `git clone git@github.com:ilyazenQ/api-example.git
+   <new-repo-name>`
 2. `docker-compose up -d`
 3. `docker exec -it app_app bash`
 4. `composer i`
