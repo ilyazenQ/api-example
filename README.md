@@ -9,7 +9,7 @@
 
 ## CRUD API
 
-Проект - пример реализации CRUD API. Технологии: сборка - docker, фреймворк - Laravel 9, документация - swagger, запросы - SpatieQueryBuilder, тесты - Pest.
+Проект - пример реализации CRUD API. Технологии: сборка - docker, фреймворк - Laravel 9, документация - swagger, запросы - SpatieQueryBuilder, тесты - Pest, полнотекстовый поиск: Elastic.
 
 ## Разворот
 
@@ -26,6 +26,8 @@ DB_CONNECTION=mysql  <br>
    DB_DATABASE=app <br>
    DB_USERNAME=root<br>
    DB_PASSWORD=root<br>
+и ElasticSearch: 
+   ELASTICSEARCH_HOSTS=app_es01
    (Если проблема с доступом - chmod 777 -R ./)
 7. `php artisan key:generate`
 8. `php artisan storage:link`
