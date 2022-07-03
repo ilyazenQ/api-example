@@ -24,3 +24,5 @@ Route::get('posts/{id}', [PostController::class, 'get'])->name('getPost');
 Route::delete('posts/{id}', [PostController::class, 'delete'])->name('deletePost');
 Route::patch('posts/{id}', [PostController::class, 'patch'])->name('patchPost');
 Route::post('posts:search', [PostController::class, 'search'])->name('searchPost');
+
+Route::post('suggests:search', [PostController::class, 'searchByElastic'])->name('searchByElastic');;

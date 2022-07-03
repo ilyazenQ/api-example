@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreatePostAction;
 use App\Actions\DeletePostAction;
+use App\Actions\FindByElasticAction;
 use App\Actions\PatchPostAction;
+use App\Elastic\ElasticSearchPosts;
+use App\Http\Requests\ElasticSearchPostRequest;
+use App\Http\Resources\ElasticSearchPostsResource;
 use App\Queries\PostQuery;
 use App\Requests\CreatePostRequest;
 use App\Requests\SearchPostRequest;
@@ -45,6 +49,16 @@ class PostController extends Controller
             $pageBuilderFactory->fromQuery($query)->build()
         );
     }
+    public function searchByElastic(
+        ElasticSearchPostRequest $request,
+        FindByElasticAction $action,
+        ElasticSearchPosts $elasticSearch
+    ) {
+        $posts = $action->execute($request->validated(), $elasticSearch);
+
+        return new ElasticSearchPostsResource($posts);
+    }
+
 
 
 }

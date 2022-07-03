@@ -137,3 +137,18 @@ SearchPostFilter:
       type: string
       example: "Example title"
       nullable: true
+
+ElasticSearchPostRequest:
+  type: object
+  properties:
+    filter:
+      $ref: '#/ElasticSearchPostFilter'
+
+ElasticSearchPostFilter:
+  type: object
+  properties:
+    queryString:
+      type: string
+      description: Поисковый запрос
+      example: test
+      nullable: true

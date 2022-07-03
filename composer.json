@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "spatie/laravel-query-builder": "^5.0",
+        "elasticsearch/elasticsearch": "^7.5",
         "zircote/swagger-php": "^4.4"
     },
     "require-dev": {
