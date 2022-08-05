@@ -11,6 +11,8 @@ class Post extends Model
     use HasFactory;
     use Searchable;
 
+    const CACHE_TIME = 3600;
+    const CACHE_KEY_NAME_FOR_ALL = 'posts';
     const FILLABLE = ['title', 'slug', 'body', 'user_id', 'is_published'];
 
     /**

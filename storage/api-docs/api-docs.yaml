@@ -63,6 +63,25 @@ paths:
           $ref: '#/components/responses/NotFound'
         "500":
           $ref: '#/components/responses/ServerError'
+  /posts:
+    get:
+      tags:
+        - posts
+      operationId: getAllPost
+      x-lg-handler: 'App\Http\Controllers\PostController@get'
+      x-lg-route-name: 'getAllPost'
+      x-lg-skip-request-generation: true
+      summary: Получение всех объектов типа Post
+      description: Получение всех объектов типа Post
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: 'posts-components.yaml#/SearchPostResponse'
+        "500":
+          $ref: '#/components/responses/ServerError'
     patch:
       tags:
         - posts
