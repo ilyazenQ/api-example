@@ -10,6 +10,7 @@ class DeletePostAction
     {
         $post = Post::findOrFail($id);
         $post::destroy($post->id);
+        (new ClearCacheWhenCreateAndDeleteAction())->execute();
     }
 
 }
