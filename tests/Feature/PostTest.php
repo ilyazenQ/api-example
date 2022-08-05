@@ -104,5 +104,4 @@ it('should find 2 posts', function () {
     ])
         ->assertStatus(200)
         ->assertJsonPath('data', fn($data) => count($data) == 2);
-
 });

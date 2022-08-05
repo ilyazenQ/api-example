@@ -45,9 +45,10 @@ class PostController extends Controller
 
     public function search(PageBuilderFactory $pageBuilderFactory, PostQuery $query)
     {
-        return PostResource::collectPage(
-            $pageBuilderFactory->fromQuery($query)->build()
-        );
+        return new PostsCollection($query->paginate());
+//        return PostResource::collectPage(
+//            $pageBuilderFactory->fromQuery($query)->build()
+//        );
     }
     public function searchByElastic(
         ElasticSearchPostRequest $request,
@@ -58,7 +59,5 @@ class PostController extends Controller
 
         return new ElasticSearchPostsResource($posts);
     }
-
-
 
 }
