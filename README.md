@@ -9,26 +9,36 @@
 
 ## CRUD API
 
-Проект - пример реализации CRUD API. Технологии: сборка - docker, фреймворк - Laravel 9, документация - swagger, запросы - SpatieQueryBuilder, тесты - Pest, полнотекстовый поиск: Elastic.
+Проект - пример реализации CRUD API. 
+Технологии: сборка - docker, фреймворк - Laravel 9, 
+документация - swagger, запросы - SpatieQueryBuilder, тесты - Pest, полнотекстовый поиск: Elastic, cache: Redis.
 
 ## Разворот
 
 1. `git clone git@github.com:ilyazenQ/api-example.git
    <new-repo-name>`
-2. `docker-compose up -d`
+2. `docker-compose up -d` (Может потребоваться VPN)
 3. `docker exec -it app_app bash`
 4. `composer i`
 5. `cp .env.example .env`
-6. Указываем в .env доступы к БД<br>
+6. Указываем в .env доступы<br>
+DB: <br>
 DB_CONNECTION=mysql  <br>
    DB_HOST=db <br>
    DB_PORT=3306 <br>
    DB_DATABASE=app <br>
    DB_USERNAME=root<br>
    DB_PASSWORD=root<br>
-и ElasticSearch: 
+ElasticSearch: <br> 
    ELASTICSEARCH_HOSTS=app_es01
-   (Если проблема с доступом - chmod 777 -R ./)
+   (Если проблема с доступом - chmod 777 -R ./) <br>
+Redis:<br>
+   CACHE_DRIVER=redis<br>
+   REDIS_CLIENT=predis<br>
+   REDIS_HOST=app_redis<br>
+   REDIS_PASSWORD=null<br>
+   REDIS_PORT=6379<br>
+<br>
 7. `php artisan key:generate`
 8. `php artisan storage:link`
 9. `php artisan migrate`
