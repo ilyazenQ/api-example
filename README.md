@@ -38,10 +38,9 @@ Redis:<br>
    REDIS_HOST=app_redis<br>
    REDIS_PASSWORD=null<br>
    REDIS_PORT=6379<br>
-<br>
-7. `php artisan key:generate`
-8. `php artisan storage:link`
-9. `php artisan migrate`
+7. `php artisan key:generate`<br>
+8. `php artisan storage:link`<br>
+9. `php artisan migrate`<br>
 
 ## *Swagger & Pest
 
