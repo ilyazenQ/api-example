@@ -16,10 +16,21 @@ QueryInclude:
   schema:
     type: string
 
-QueryString:
+
+QueryStringEmployer:
   in: query
-  name: queryString
+  name: QueryStringEmployer
   required: true
-  description: Поисковая фраза
+  description: Текст поиска
   schema:
     type: string
+
+AreaId:
+  in: query
+  name: AreaId
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+  description: Числовой id области расположения поиска работодателя
+  example: 35

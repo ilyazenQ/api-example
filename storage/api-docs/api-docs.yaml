@@ -10,7 +10,9 @@ servers:
   - url: http://localhost:8877/api
 tags:
   - name: posts
-    description: тег для объекта типа Post
+    description: тег для объектов типа Post
+  - name: HeadHunterApi
+    description: тег для получния информации с Api HeadHunter
 paths:
   /posts/create:
     post:
@@ -189,6 +191,29 @@ paths:
                 $ref: 'posts-components.yaml#/SearchPostResponse'
         "500":
           $ref: '#/components/responses/ServerError'
+  /getEmployer:
+    get:
+      tags:
+        - HeadHunterApi
+      operationId: getEmployer
+      x-lg-handler: 'App\Http\Controllers\HHController@getEmployer'
+      x-lg-route-name: 'getEmployer'
+      x-lg-skip-request-generation: true
+      summary: Поиск работодателя
+      description: Поиск по тексту. Переданное значение ищется в названии и описании работодателя
+      parameters:
+        - $ref: '#/components/parameters/QueryStringEmployer'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: 'posts-components.yaml#/PostResponse'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/ServerError'
 
 components:
   parameters:
@@ -196,6 +221,10 @@ components:
       $ref: './common_parameters.yaml#/QueryInclude'
     PathId:
       $ref: './common_parameters.yaml#/PathId'
+    QueryStringEmployer:
+      $ref: './common_parameters.yaml#/QueryStringEmployer'
+    AreaId:
+      $ref: './common_parameters.yaml#/AreaId'
   schemas:
     EmptyDataResponse:
       type: object
