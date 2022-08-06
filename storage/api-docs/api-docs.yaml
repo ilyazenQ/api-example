@@ -64,15 +64,21 @@ paths:
         "500":
           $ref: '#/components/responses/ServerError'
   /posts:
-    get:
+    post:
       tags:
         - posts
       operationId: getAllPost
-      x-lg-handler: 'App\Http\Controllers\PostController@get'
+      x-lg-handler: 'App\Http\Controllers\PostController@getAll'
       x-lg-route-name: 'getAllPost'
       x-lg-skip-request-generation: true
       summary: Получение всех объектов типа Post
       description: Получение всех объектов типа Post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'posts-components.yaml#/getAllPostRequest'
       responses:
         "200":
           description: Успешный ответ

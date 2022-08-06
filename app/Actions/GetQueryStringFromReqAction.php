@@ -3,7 +3,7 @@ namespace App\Actions;
 
 use Illuminate\Http\Request;
 
-class GetQueryStringFromReqAction
+class GetQueryStringFromReqAction implements Action
 {
     public function execute(array $fields): string
     {

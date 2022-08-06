@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use App\Elastic\ElasticSearchPosts;
 
-class FindByElasticAction
+class FindByElasticAction implements Action
 {
     public function execute(array $fields, ElasticSearchPosts $elasticSearch): array
     {

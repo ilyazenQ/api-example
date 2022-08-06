@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
 
-class ClearCacheWhenCreateAndDeleteAction
+class ClearPostsCache implements Action
 {
     public function execute()
     {

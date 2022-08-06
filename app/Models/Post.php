@@ -15,6 +15,8 @@ class Post extends Model
     const CACHE_KEY_NAME_FOR_ALL = 'posts';
     const FILLABLE = ['title', 'slug', 'body', 'user_id', 'is_published'];
 
+    const PAGE_DEFAULT = 1;
+    const PER_PAGE_DEFAULT = 15;
     /**
      * @var array
      */

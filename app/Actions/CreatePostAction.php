@@ -5,11 +5,11 @@ namespace App\Actions;
 use App\Models\Post;
 use Illuminate\Support\Arr;
 
-class CreatePostAction
+class CreatePostAction implements Action
 {
     public function execute(array $fields): Post
     {
-        (new ClearCacheWhenCreateAndDeleteAction())->execute();
+        (new ClearPostsCache())->execute();
         return Post::create(Arr::only($fields, Post::FILLABLE));
     }
 

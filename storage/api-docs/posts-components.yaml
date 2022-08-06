@@ -152,3 +152,15 @@ ElasticSearchPostFilter:
       description: Поисковый запрос
       example: test
       nullable: true
+
+getAllPostRequest:
+  type: object
+  properties:
+    page:
+      type: integer
+      example: 1
+      nullable: true
+    per_page:
+      type: integer
+      example: 1
+      nullable: true

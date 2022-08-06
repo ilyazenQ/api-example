@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Action;
 use App\Actions\CacheAllPostAction;
-use App\Actions\ClearCacheWhenCreateAndDeleteAction;
+use App\Actions\ClearPostsCache;
 use App\Actions\CreatePostAction;
 use App\Actions\DeletePostAction;
 use App\Actions\FindByElasticAction;
+use App\Actions\GetAllPostAction;
 use App\Actions\PatchPostAction;
 use App\Elastic\ElasticSearchPosts;
 use App\Http\Requests\ElasticSearchPostRequest;
 use App\Http\Resources\ElasticSearchPostsResource;
 use App\Queries\PostQuery;
 use App\Requests\CreatePostRequest;
+use App\Requests\GetAllPostsRequest;
 use App\Requests\SearchPostRequest;
 use App\Requests\UpdatePostRequest;
 use App\Resources\EmptyResource;
@@ -37,9 +40,11 @@ class PostController extends Controller
         return new PostResource($query->findOrFail($id));
     }
 
-    public function getAll(PostQuery $query, CacheAllPostAction $action): PostsCollection
+    public function getAll(PostQuery          $query,
+                           GetAllPostAction   $action,
+                           GetAllPostsRequest $request): PostsCollection
     {
-        return new PostsCollection($action->execute($query));
+        return new PostsCollection($action->execute($query, $request->validated()));
     }
 
     public function delete(int $id, DeletePostAction $action)

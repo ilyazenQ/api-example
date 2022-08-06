@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Models\Post;
 use Illuminate\Support\Arr;
 
-class PatchPostAction
+class PatchPostAction implements Action
 {
     public function execute(int $id, array $fields): Post
     {
