@@ -9,7 +9,6 @@ class CreatePostAction implements Action
 {
     public function execute(array $fields): Post
     {
-        (new ClearPostsCache())->execute();
         return Post::create(Arr::only($fields, Post::FILLABLE));
     }
 

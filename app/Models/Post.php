@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Elastic\Traits\Searchable;
+use App\Observers\PostObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,10 @@ class Post extends Model
 
     const PAGE_DEFAULT = 1;
     const PER_PAGE_DEFAULT = 15;
+
+    protected $observers = [
+        Post::class => [PostObserver::class],
+    ];
     /**
      * @var array
      */

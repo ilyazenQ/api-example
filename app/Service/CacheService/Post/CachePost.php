@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Actions;
+namespace App\Service\CacheService\Post;
+
 
 use App\Models\Post;
 use App\Queries\PostQuery;
 use Illuminate\Support\Facades\Cache;
 
-class CacheAllPostAction implements Action
+class CachePost
 {
-    public function execute(PostQuery $query, array $fields)
+    public function cacheAll(PostQuery $query, array $fields)
     {
         return Cache::remember(Post::CACHE_KEY_NAME_FOR_ALL, Post::CACHE_TIME,
             function () use ($query,$fields) {
@@ -16,4 +17,10 @@ class CacheAllPostAction implements Action
             });
     }
 
+    public function ClearPostsCache()
+    {
+        if(Cache::has(Post::CACHE_KEY_NAME_FOR_ALL)) {
+            Cache::forget(Post::CACHE_KEY_NAME_FOR_ALL);
+        }
+    }
 }
